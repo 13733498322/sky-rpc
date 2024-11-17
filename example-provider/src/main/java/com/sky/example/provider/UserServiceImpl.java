@@ -8,7 +8,7 @@ import com.sky.eaxample.common.service.UserService;
  * @date 2024-11-17 19:24
  * @description 用户服务实现类
  */
-public class UerServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
     @Override
     public User getUser(User user) {
         System.out.println("用户名： "+user.getName());
