@@ -8,6 +8,11 @@ import io.vertx.core.Vertx;
  * @description 编写基于 Vert.x 实现的 web 服务器 VertxHttpServer，能够监听指定端口并处理请求。
  */
 public class VertxHttpServer implements HttpServer{
+
+    /**
+     * 启动服务器
+     * @param port
+     */
     @Override
     public void doStart(int port) {
         //创建vertx实例
