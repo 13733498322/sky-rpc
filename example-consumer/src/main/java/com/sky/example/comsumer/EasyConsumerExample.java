@@ -2,6 +2,7 @@ package com.sky.example.comsumer;
 
 import com.sky.eaxample.common.model.User;
 import com.sky.eaxample.common.service.UserService;
+import com.sky.skyrpc.proxy.ServiceProxyFactory;
 
 /**
  * @author 胖了又胖的胖凯
@@ -10,7 +11,9 @@ import com.sky.eaxample.common.service.UserService;
  */
 public class EasyConsumerExample {
     public static void main(String[] args) {
-        UserService userService=null;
+        //动态代理
+        UserService userService= ServiceProxyFactory.getProxy(UserService.class);
+       // UserService userService=new UserServiceProxy();
         User user=new User();
         user.setName("sky");
         User newUser = userService.getUser(user);
