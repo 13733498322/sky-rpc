@@ -1,12 +1,13 @@
 package com.sky.skyrpc.server;
 
 
-
+import com.sky.skyrpc.RpcApplication;
 import com.sky.skyrpc.model.RpcRequest;
 import com.sky.skyrpc.model.RpcResponse;
 import com.sky.skyrpc.registry.LocalRegistry;
 import com.sky.skyrpc.serializer.JdkSerializer;
 import com.sky.skyrpc.serializer.Serializer;
+import com.sky.skyrpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -15,22 +16,20 @@ import io.vertx.core.http.HttpServerResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-
 /**
- * @author 胖了又胖的胖凯
- * @date 2024-11-17 20:41
- * @description HTTP 请求处理
- * 1.反序列化请求为对象，并从请求对象中获取参数。
- * 2.根据服务名称从本地注册器中获取到对应的服务实现类。
- * 3.通过反射机制调用方法，得到返回结果
- * 4.对返回结果进行封装和序列化，并写入到响应中。
+ * HTTP 请求处理
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @learn <a href="https://codefather.cn">编程宝典</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public class HttpServerHandler implements Handler<HttpServerRequest> {
 
     @Override
     public void handle(HttpServerRequest request) {
         // 指定序列化器
-        final Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
+
 
         // 记录日志
         System.out.println("Received request: " + request.method() + " " + request.uri());

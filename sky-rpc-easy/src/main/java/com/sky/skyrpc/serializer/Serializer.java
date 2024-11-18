@@ -3,9 +3,11 @@ package com.sky.skyrpc.serializer;
 import java.io.IOException;
 
 /**
- * @author 胖了又胖的胖凯
- * @date 2024-11-17 20:29
- * @description 序列化器接口
+ * 序列化器接口
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @learn <a href="https://codefather.cn">编程宝典</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public interface Serializer {
 

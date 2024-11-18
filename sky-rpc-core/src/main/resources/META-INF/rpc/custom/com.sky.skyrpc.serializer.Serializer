@@ -1,0 +1,4 @@
+jdk=com.sky.skyrpc.serializer.JdkSerializer
+hessian=com.sky.skyrpc.serializer.HessianSerializer
+json=com.sky.skyrpc.serializer.JsonSerializer
+kryo=com.sky.skyrpc.serializer.KryoSerializer

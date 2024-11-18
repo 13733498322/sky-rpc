@@ -2,19 +2,23 @@ package com.sky.skyrpc.proxy;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.sky.skyrpc.RpcApplication;
 import com.sky.skyrpc.model.RpcRequest;
 import com.sky.skyrpc.model.RpcResponse;
 import com.sky.skyrpc.serializer.JdkSerializer;
 import com.sky.skyrpc.serializer.Serializer;
+import com.sky.skyrpc.serializer.SerializerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * @author 胖了又胖的胖凯
- * @date 2024-11-17 21:44
- * @description 服务代理（JDK 动态代理）
+ * 服务代理（JDK 动态代理）
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @learn <a href="https://codefather.cn">编程宝典</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public class ServiceProxy implements InvocationHandler {
 
@@ -27,7 +31,8 @@ public class ServiceProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 指定序列化器
-        Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
+
 
         // 构造请求
         RpcRequest rpcRequest = RpcRequest.builder()

@@ -3,16 +3,14 @@ package com.sky.skyrpc.server;
 import io.vertx.core.Vertx;
 
 /**
- * @author 胖了又胖的胖凯
- * @date 2024-11-17 20:03
- * @description 编写基于 Vert.x 实现的 web 服务器 VertxHttpServer，能够监听指定端口并处理请求。
+ * Vertx HTTP 服务器
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @learn <a href="https://codefather.cn">编程宝典</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
-public class VertxHttpServer implements HttpServer{
+public class VertxHttpServer implements HttpServer {
 
-    /**
-     * 启动服务器
-     * @param port
-     */
     /**
      * 启动服务器
      *

@@ -5,16 +5,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
- * @author 胖了又胖的胖凯
- * @date 2024-11-17 20:40
- * @description RPC 响应
+ * RPC 响应
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @learn <a href="https://codefather.cn">编程宝典</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RpcResponse {
+public class RpcResponse implements Serializable {
+
     /**
      * 响应数据
      */
@@ -34,4 +39,5 @@ public class RpcResponse {
      * 异常信息
      */
     private Exception exception;
+
 }
