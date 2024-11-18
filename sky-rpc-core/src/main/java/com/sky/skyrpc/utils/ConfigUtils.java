@@ -41,4 +41,15 @@ public class ConfigUtils {
         Props props = new Props(configFileBuilder.toString());
         return props.toBean(tClass,prefix);
     }
+
+    // TODO: 2024/11/18  扩展支持读取application.yml、application.yaml等不同格式的配置文件
+//    public static <T> T loadConfig(Class<T> tClass,String prefix,String environment,String suffix){
+//        StringBuilder configFileBuilder = new StringBuilder("application");
+//        if(StrUtil.isNotBlank(environment)){
+//            configFileBuilder.append("-").append(environment);
+//        }
+//        configFileBuilder.append(suffix);
+//        Props props = new Props(configFileBuilder.toString());
+//        return props.toBean(tClass,prefix);
+//    }
 }
