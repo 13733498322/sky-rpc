@@ -2,10 +2,12 @@ package com.sky.skyrpc.proxy;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.sky.skyrpc.RpcApplication;
 import com.sky.skyrpc.model.RpcRequest;
 import com.sky.skyrpc.model.RpcResponse;
 import com.sky.skyrpc.serializer.JdkSerializer;
 import com.sky.skyrpc.serializer.Serializer;
+import com.sky.skyrpc.serializer.SerializerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
@@ -27,7 +29,7 @@ public class ServiceProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 指定序列化器
-        Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
 
         // 构造请求
         RpcRequest rpcRequest = RpcRequest.builder()
