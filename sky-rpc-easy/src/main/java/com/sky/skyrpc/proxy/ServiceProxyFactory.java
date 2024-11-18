@@ -8,6 +8,7 @@ import java.lang.reflect.Proxy;
  * @description 服务代理工厂（用于创建代理对象）
  */
 public class ServiceProxyFactory {
+
     /**
      * 根据服务类获取代理对象
      *
@@ -21,5 +22,4 @@ public class ServiceProxyFactory {
                 new Class[]{serviceClass},
                 new ServiceProxy());
     }
-
 }

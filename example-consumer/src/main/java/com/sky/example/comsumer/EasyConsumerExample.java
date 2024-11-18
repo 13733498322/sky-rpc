@@ -11,9 +11,10 @@ import com.sky.skyrpc.proxy.ServiceProxyFactory;
  */
 public class EasyConsumerExample {
     public static void main(String[] args) {
-        //动态代理
-        UserService userService= ServiceProxyFactory.getProxy(UserService.class);
-       // UserService userService=new UserServiceProxy();
+        // 获取代理
+        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
+
+        // UserService userService=new UserServiceProxy();
         User user=new User();
         user.setName("sky");
         User newUser = userService.getUser(user);

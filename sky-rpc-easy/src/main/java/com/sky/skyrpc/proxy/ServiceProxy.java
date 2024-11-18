@@ -17,19 +17,25 @@ import java.lang.reflect.Method;
  * @description 服务代理（JDK 动态代理）
  */
 public class ServiceProxy implements InvocationHandler {
+
+    /**
+     * 调用代理
+     *
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 指定序列化器
-        final Serializer serializer=new JdkSerializer();
+        Serializer serializer = new JdkSerializer();
 
         // 构造请求
-        RpcRequest rpcRequest=RpcRequest.builder()
+        RpcRequest rpcRequest = RpcRequest.builder()
                 .serviceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
-                .args(args)
                 .parameterTypes(method.getParameterTypes())
+                .args(args)
                 .build();
-
         try {
             // 序列化
             byte[] bodyBytes = serializer.serialize(rpcRequest);
