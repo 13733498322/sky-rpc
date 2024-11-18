@@ -1,6 +1,7 @@
 package com.sky.example.provider;
 
 import com.sky.eaxample.common.service.UserService;
+import com.sky.skyrpc.RpcApplication;
 import com.sky.skyrpc.registry.LocalRegistry;
 import com.sky.skyrpc.server.HttpServer;
 import com.sky.skyrpc.server.VertxHttpServer;
@@ -12,6 +13,9 @@ import com.sky.skyrpc.server.VertxHttpServer;
  */
 public class EasyProviderExample {
     public static void main(String[] args) {
+        //RPC 框架初始化
+        RpcApplication.init();
+
         //注册服务
         LocalRegistry.register(UserService.class.getName(),UserServiceImpl.class);
 
