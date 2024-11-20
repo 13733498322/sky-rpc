@@ -22,13 +22,13 @@ public interface Registry {
      * @param serviceMetaInfo
      * @throws Exception
      */
-    void registry(ServiceMetaInfo serviceMetaInfo) throws Exception;
+    void register(ServiceMetaInfo serviceMetaInfo) throws Exception;
 
     /**
      * 注销服务（服务端）
      * @param serviceMetaInfo
      */
-    void unRegistry(ServiceMetaInfo serviceMetaInfo);
+    void unRegister(ServiceMetaInfo serviceMetaInfo);
 
     /**
      * 服务发现（获取某服务的所有节点，消费端）
