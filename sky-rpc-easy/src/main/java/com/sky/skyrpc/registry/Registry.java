@@ -11,6 +11,8 @@ import java.util.List;
  * @description 注册中心
  */
 public interface Registry {
+
+
     /**
      * 初始化
      * @param registryConfig
@@ -41,4 +43,9 @@ public interface Registry {
      * 服务销毁
      */
     void destroy();
+
+    /**
+     * 心跳检测（服务端）
+     */
+    void heartbeat();
 }
