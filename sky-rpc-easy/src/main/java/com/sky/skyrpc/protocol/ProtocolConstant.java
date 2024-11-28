@@ -5,7 +5,7 @@ package com.sky.skyrpc.protocol;
  * @date 2024-11-27 22:32
  * @description 协议常量
  */
-public class ProtocolConstant {
+public interface ProtocolConstant {
 
     /**
      * 消息头长度
