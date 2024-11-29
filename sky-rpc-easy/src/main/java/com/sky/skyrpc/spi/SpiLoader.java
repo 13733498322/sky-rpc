@@ -75,6 +75,8 @@ public class SpiLoader {
         if (keyClassMap == null) {
             throw new RuntimeException(String.format("SpiLoader 未加载 %s 类型", tClassName));
         }
+
+        // TODO: 2024/11/29 key=etcd的value值不存在，需要改bug
         if (!keyClassMap.containsKey(key)) {
             throw new RuntimeException(String.format("SpiLoader 的 %s 不存在 key=%s 的类型", tClassName, key));
         }
