@@ -1,1 +1,1 @@
-etcd=com.yupi.yurpc.registry.EtcdRegistry
+etcd=com.sky.skyrpc.registry.EtcdRegistry
