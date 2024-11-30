@@ -7,6 +7,8 @@ import cn.hutool.http.HttpResponse;
 import com.sky.skyrpc.RpcApplication;
 import com.sky.skyrpc.config.RpcConfig;
 import com.sky.skyrpc.constant.RpcConstant;
+import com.sky.skyrpc.fault.retry.RetryStrategy;
+import com.sky.skyrpc.fault.retry.RetryStrategyFactory;
 import com.sky.skyrpc.loadbalancer.LoadBalancer;
 import com.sky.skyrpc.loadbalancer.LoadBalancerFactory;
 import com.sky.skyrpc.model.RpcRequest;
@@ -78,8 +80,13 @@ public class ServiceProxy implements InvocationHandler {
             requestParams.put("methodName",rpcRequest.getMethodName());
 
             ServiceMetaInfo selectedServiceMetaInfo = serviceMetaInfoList.get(0);
+
             // 发送 TCP 请求
-            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
+            //使用重试机制
+            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+            RpcResponse rpcResponse = retryStrategy.doRetry(() -> {
+                return VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
+            });
             return rpcResponse.getData();
         } catch (Exception e) {
             throw new RuntimeException("调用失败");

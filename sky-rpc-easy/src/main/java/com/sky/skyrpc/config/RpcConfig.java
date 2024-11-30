@@ -1,5 +1,6 @@
 package com.sky.skyrpc.config;
 
+import com.sky.skyrpc.fault.retry.RetryStrategyKeys;
 import com.sky.skyrpc.loadbalancer.LoadBalancerKeys;
 import com.sky.skyrpc.serializer.SerializerKeys;
 import lombok.Data;
@@ -51,5 +52,10 @@ public class RpcConfig {
      * 负载均衡器
      */
     private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+
+    /**
+     * 重试策略
+     */
+    private String retryStrategy = RetryStrategyKeys.NO;
 
 }
