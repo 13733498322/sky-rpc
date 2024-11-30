@@ -2,6 +2,7 @@ package com.sky.example.comsumer;
 
 import com.sky.eaxample.common.model.User;
 import com.sky.eaxample.common.service.UserService;
+import com.sky.skyrpc.bootstrap.ConsumerBootStrap;
 import com.sky.skyrpc.config.RpcConfig;
 import com.sky.skyrpc.proxy.ServiceProxyFactory;
 import com.sky.skyrpc.utils.ConfigUtils;
@@ -15,6 +16,8 @@ import com.sky.skyrpc.utils.ConfigUtils;
 public class ConsumerExample {
 
     public static void main(String[] args) {
+        //服务提供者初始化
+        ConsumerBootStrap.init();
         // 获取代理
         UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
