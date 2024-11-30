@@ -1,0 +1,3 @@
+roundRobin=com.sky.skyrpc.loadbalancer.RoundRobinLoadBalancer
+random=com.sky.skyrpc.loadbalancer.RandomLoadBalancer
+consistentHash=com.sky.skyrpc.loadbalancer.ConsistentHashLoadBalancer

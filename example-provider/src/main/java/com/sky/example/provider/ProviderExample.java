@@ -41,7 +41,7 @@ public class ProviderExample {
 
         //启动TCP服务
         VertxTcpServer vertxTcpServer = new VertxTcpServer();
-        vertxTcpServer.doStart(8080);
+        vertxTcpServer.doStart(8081);
     }
 
 }

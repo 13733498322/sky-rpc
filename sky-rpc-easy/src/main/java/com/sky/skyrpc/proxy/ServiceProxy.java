@@ -7,6 +7,8 @@ import cn.hutool.http.HttpResponse;
 import com.sky.skyrpc.RpcApplication;
 import com.sky.skyrpc.config.RpcConfig;
 import com.sky.skyrpc.constant.RpcConstant;
+import com.sky.skyrpc.loadbalancer.LoadBalancer;
+import com.sky.skyrpc.loadbalancer.LoadBalancerFactory;
 import com.sky.skyrpc.model.RpcRequest;
 import com.sky.skyrpc.model.RpcResponse;
 import com.sky.skyrpc.model.ServiceMetaInfo;
@@ -25,7 +27,9 @@ import io.vertx.core.net.NetSocket;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -66,6 +70,13 @@ public class ServiceProxy implements InvocationHandler {
             if (CollUtil.isEmpty(serviceMetaInfoList)) {
                 throw new RuntimeException("暂无服务地址");
             }
+
+            //负载均衡
+            LoadBalancer loadBalancer = LoadBalancerFactory.getInstance(rpcConfig.getLoadBalancer());
+            //调用方法名（请求路径）作为负载均衡参数
+            Map<String,Object> requestParams = new HashMap<>();
+            requestParams.put("methodName",rpcRequest.getMethodName());
+
             ServiceMetaInfo selectedServiceMetaInfo = serviceMetaInfoList.get(0);
             // 发送 TCP 请求
             RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
