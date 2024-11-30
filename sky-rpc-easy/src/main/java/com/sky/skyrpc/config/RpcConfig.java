@@ -1,6 +1,7 @@
 package com.sky.skyrpc.config;
 
 import com.sky.skyrpc.fault.retry.RetryStrategyKeys;
+import com.sky.skyrpc.fault.tolerant.TolerantStrategyKeys;
 import com.sky.skyrpc.loadbalancer.LoadBalancerKeys;
 import com.sky.skyrpc.serializer.SerializerKeys;
 import lombok.Data;
@@ -57,5 +58,10 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NO;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 
 }

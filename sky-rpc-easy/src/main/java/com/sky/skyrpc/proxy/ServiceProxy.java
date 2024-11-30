@@ -9,6 +9,8 @@ import com.sky.skyrpc.config.RpcConfig;
 import com.sky.skyrpc.constant.RpcConstant;
 import com.sky.skyrpc.fault.retry.RetryStrategy;
 import com.sky.skyrpc.fault.retry.RetryStrategyFactory;
+import com.sky.skyrpc.fault.tolerant.TolerantStrategy;
+import com.sky.skyrpc.fault.tolerant.TolerantStrategyFactory;
 import com.sky.skyrpc.loadbalancer.LoadBalancer;
 import com.sky.skyrpc.loadbalancer.LoadBalancerFactory;
 import com.sky.skyrpc.model.RpcRequest;
@@ -83,11 +85,19 @@ public class ServiceProxy implements InvocationHandler {
 
             // 发送 TCP 请求
             //使用重试机制
-            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
-            RpcResponse rpcResponse = retryStrategy.doRetry(() -> {
-                return VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
-            });
+            RpcResponse rpcResponse;
+            try {
+                RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+                rpcResponse = retryStrategy.doRetry(() ->
+                        VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+                );
+            } catch (Exception e) {
+                // 容错机制
+                TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());
+                rpcResponse = tolerantStrategy.doTolerant(null, e);
+            }
             return rpcResponse.getData();
+
         } catch (Exception e) {
             throw new RuntimeException("调用失败");
         }

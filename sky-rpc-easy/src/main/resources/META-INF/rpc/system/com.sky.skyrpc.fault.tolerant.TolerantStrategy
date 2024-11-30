@@ -1,0 +1,4 @@
+failBack=com.sky.skyrpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.sky.skyrpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.sky.skyrpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.sky.skyrpc.fault.tolerant.FailSafeTolerantStrategy
