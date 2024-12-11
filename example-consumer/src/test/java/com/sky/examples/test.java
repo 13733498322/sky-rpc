@@ -1,6 +1,8 @@
 package com.sky.examples;
 
+import com.sky.skyrpc.config.RpcConfig;
 import com.sky.skyrpc.spi.SpiLoader;
+import com.sky.skyrpc.utils.ConfigUtils;
 
 /**
  * @author 胖了又胖的胖凯
@@ -9,6 +11,6 @@ import com.sky.skyrpc.spi.SpiLoader;
  */
 public class test {
     public static void main(String[] args) {
-        SpiLoader.loadAll();
+        System.out.println(ConfigUtils.loadConfig(RpcConfig.class, "rpc"));
     }
 }
